@@ -1,0 +1,818 @@
+<?php require_once 'config.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= BRIDE_NAME ?> &amp; <?= GROOM_NAME ?> — Wedding Invitation</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="invitation-mode">
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     INVITATION LANDING SCREEN
+═══════════════════════════════════════════════════════════════════════════════ -->
+<div id="invitationScreen">
+
+    <!-- Background photo + overlays -->
+    <div class="inv-bg">
+        <img
+            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80"
+            alt="Wedding floral background"
+            loading="eager"
+        >
+        <div class="inv-overlay-dark"></div>
+        <div class="inv-overlay-vignette"></div>
+        <div class="inv-overlay-bottom"></div>
+    </div>
+
+    <!-- Floating petal particles -->
+    <div class="particles" aria-hidden="true">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+    </div>
+
+    <!-- Invitation content -->
+    <div class="invite-content">
+
+        <p class="inv-tagline">✦ &nbsp; Together with their families &nbsp; ✦</p>
+
+        <div class="gold-divider-light inv-divider"></div>
+
+        <h1 class="inv-title">You Are Invited</h1>
+
+        <p class="inv-names"><?= BRIDE_NAME ?> &amp; <?= GROOM_NAME ?></p>
+
+        <div class="gold-divider-light inv-divider-2"></div>
+
+        <p class="inv-date"><?= WEDDING_DATE ?></p>
+        <p class="ven-label">CEREMONY</p>
+        <p class="inv-venue"><?= CEREMONY ?></p>
+        <p class="ven-label">RECEPTION</p>
+        <p class="inv-venue"><?= RECEPTION ?></p>
+
+        <button onclick="enterSite()" class="inv-btn">
+            <span>RSVP Now</span>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </button>
+
+        <p class="inv-deadline">Kindly respond by <?= RSVP_DEADLINE ?></p>
+
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#home" id="navBrand"><?= BRIDE_NAME ?> &amp; <?= GROOM_NAME ?></a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#details">Details</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#entourage">Entourage</a></li>
+            <li><a href="#gift">Gifts</a></li>
+            <li><a href="#rsvp" class="nav-rsvp">RSVP</a></li>
+        </ul>
+
+        <button id="menuBtn" aria-label="Menu">
+            <svg id="iconMenu" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="iconClose" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobileMenu">
+        <ul>
+            <li><a href="#home"       onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="#details"    onclick="closeMobileMenu()">Details</a></li>
+            <li><a href="#motif"      onclick="closeMobileMenu()">Dress Code</a></li>
+            <li><a href="#schedule"   onclick="closeMobileMenu()">Schedule</a></li>
+            <li><a href="#map"        onclick="closeMobileMenu()">Map &amp; Directions</a></li>
+            <li><a href="#entourage"  onclick="closeMobileMenu()">Entourage</a></li>
+            <li><a href="#gift"       onclick="closeMobileMenu()">Gift Note</a></li>
+            <li><a href="#rsvp"       onclick="closeMobileMenu()" class="nav-rsvp-mobile">RSVP</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="home">
+
+    <div class="hero-blobs" aria-hidden="true">
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+        <div class="hero-blob blob-3"></div>
+        <div class="hero-blob blob-4"></div>
+    </div>
+
+    <div class="hero-inner">
+        <p class="hero-tagline">Together with their families</p>
+
+        <div class="gold-divider hero-divider"></div>
+
+        <p class="hero-subtitle">You are cordially invited to celebrate the marriage of</p>
+
+        <h1 class="hero-name"><?= BRIDE_NAME ?></h1>
+        <p class="hero-ampersand">&amp;</p>
+        <h1 class="hero-name hero-name-last"><?= GROOM_NAME ?></h1>
+
+        <div class="gold-divider hero-divider"></div>
+
+        <p class="hero-date"><?= WEDDING_DATE ?></p>
+        <p class="hero-venue"><?= VENUE_NAME ?></p>
+
+        <!-- Countdown timer -->
+        <div id="countdown">
+            <?php foreach (['days' => 'Days', 'hours' => 'Hours', 'minutes' => 'Min', 'seconds' => 'Sec'] as $id => $label): ?>
+            <div class="countdown-unit">
+                <div id="<?= $id ?>" class="countdown-num">00</div>
+                <div class="countdown-label"><?= $label ?></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <a href="#rsvp" class="hero-cta">
+            RSVP Now
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+        </a>
+
+        <p class="hero-deadline">Kindly respond by <?= RSVP_DEADLINE ?></p>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="scroll-cue" aria-hidden="true">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DETAILS
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="details">
+    <div class="details-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">Mark your calendar</p>
+            <h2 class="section-title">Event Details</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <div class="details-grid">
+
+            <!-- Date -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <h3>Date</h3>
+                <p><?= WEDDING_DATE ?></p>
+                <p class="detail-sub"><?= WEDDING_TIME ?></p>
+            </div>
+
+            <!-- Venue -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h3>Venue</h3>
+                <p><?= VENUE_NAME ?></p>
+                <p class="detail-sub"><?= VENUE_ADDRESS ?></p>
+            </div>
+
+            <!-- Dress Code -->
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                </div>
+                <h3>Dress Code</h3>
+                <p>Black Tie Optional</p>
+                <p class="detail-sub">Formal attire encouraged</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SCHEDULE
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="schedule">
+    <div class="schedule-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">The day's events</p>
+            <h2 class="section-title">Schedule</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <?php
+        $events = [
+            ['time' => '3:30 PM',  'title' => 'Guest Arrival',    'desc' => 'Guests are welcomed and seated'],
+            ['time' => '4:00 PM',  'title' => 'Wedding Ceremony', 'desc' => 'Exchange of vows and rings'],
+            ['time' => '5:00 PM',  'title' => 'Cocktail Hour',    'desc' => 'Drinks, canapés &amp; photos on the terrace'],
+            ['time' => '6:30 PM',  'title' => 'Dinner Reception', 'desc' => 'A sit-down celebration dinner'],
+            ['time' => '8:00 PM',  'title' => 'First Dance',      'desc' => 'Opening the dance floor'],
+            ['time' => '11:00 PM', 'title' => 'Farewell',         'desc' => 'Late-night snack &amp; send-off'],
+        ];
+        ?>
+
+        <div class="timeline">
+            <?php foreach ($events as $ev): ?>
+            <div class="timeline-item">
+                <div class="timeline-dot">
+                    <div class="timeline-dot-inner"></div>
+                </div>
+                <div class="timeline-row">
+                    <span class="timeline-time"><?= $ev['time'] ?></span>
+                    <div class="timeline-event">
+                        <h3><?= $ev['title'] ?></h3>
+                        <p><?= $ev['desc'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DRESS CODE & MOTIF / COLOR GUIDE
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="motif">
+    <div class="motif-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">What to wear</p>
+            <h2 class="section-title">Dress Code &amp; Motif</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <div class="motif-theme-pill"><?= MOTIF_THEME ?></div>
+
+        <!-- Color swatches -->
+        <?php
+        $motifColors = [
+            ['hex' => '#C9A84C', 'name' => 'Gold',       'role' => 'Primary Accent'],
+            ['hex' => '#D4A5B0', 'name' => 'Dusty Rose',  'role' => 'Primary Motif'],
+            ['hex' => '#B57D8E', 'name' => 'Mauve',       'role' => 'Deep Accent'],
+            ['hex' => '#F2E8EC', 'name' => 'Blush',       'role' => 'Soft Base'],
+            ['hex' => '#8FA68F', 'name' => 'Sage',        'role' => 'Neutral Accent'],
+        ];
+        ?>
+        <div class="color-palette">
+            <?php foreach ($motifColors as $c): ?>
+            <div class="color-swatch">
+                <div class="swatch-circle" style="background:<?= $c['hex'] ?>; <?= $c['name'] === 'Blush' ? 'border:1px solid #e5d8e0;' : '' ?>"></div>
+                <p class="swatch-name"><?= $c['name'] ?></p>
+                <p class="swatch-hex"><?= $c['hex'] ?></p>
+                <p class="swatch-role"><?= $c['role'] ?></p>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Dress code note -->
+        <div class="dress-code-note">
+            <div class="dress-code-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7l-3 10h16l-3-10M12 3v4m0 0l-2-2m2 2l2-2"/>
+                </svg>
+            </div>
+            <h3><?= DRESS_CODE_TYPE ?></h3>
+            <p><?= DRESS_CODE_DESC ?></p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     MAP & DIRECTIONS
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="map">
+    <div class="map-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">Find us here</p>
+            <h2 class="section-title">Map &amp; Directions</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <div class="map-layout">
+
+            <!-- Venue info -->
+            <div class="map-info">
+                <div class="map-venue-block">
+                    <div class="map-venue-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="map-venue-label">Ceremony</p>
+                        <p class="map-venue-name"><?= CEREMONY ?></p>
+                    </div>
+                </div>
+
+                <div class="map-venue-block">
+                    <div class="map-venue-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="map-venue-label">Reception</p>
+                        <p class="map-venue-name"><?= VENUE_NAME ?></p>
+                        <p class="map-venue-address"><?= VENUE_ADDRESS ?></p>
+                    </div>
+                </div>
+
+                <a href="<?= MAP_LINK ?>" target="_blank" rel="noopener noreferrer" class="map-btn">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+                    </svg>
+                    Open in Google Maps
+                </a>
+            </div>
+
+            <!-- Map embed or placeholder -->
+            <div class="map-embed-wrap">
+                <?php if (MAP_EMBED_URL): ?>
+                <iframe
+                    src="<?= htmlspecialchars(MAP_EMBED_URL) ?>"
+                    width="100%" height="100%"
+                    style="border:0;" allowfullscreen=""
+                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Venue map">
+                </iframe>
+                <?php else: ?>
+                <div class="map-placeholder">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <p class="map-ph-name"><?= VENUE_NAME ?></p>
+                    <p class="map-ph-addr"><?= VENUE_ADDRESS ?></p>
+                    <p class="map-ph-hint">Paste your Google Maps embed URL in <code>config.php → MAP_EMBED_URL</code></p>
+                </div>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ENTOURAGE LIST
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="entourage">
+    <div class="entourage-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">Our beloved circle</p>
+            <h2 class="section-title">Entourage</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <?php
+        $entourage = [
+            [
+                'title'   => 'Parents of the Bride',
+                'icon'    => 'heart',
+                'columns' => [['names' => ['Name of Father', 'Name of Mother']]],
+            ],
+            [
+                'title'   => 'Parents of the Groom',
+                'icon'    => 'heart',
+                'columns' => [['names' => ['Name of Father', 'Name of Mother']]],
+            ],
+            [
+                'title'   => 'Principal Sponsors',
+                'icon'    => 'star',
+                'columns' => [
+                    ['label' => 'Ninong', 'names' => ['Name Here', 'Name Here', 'Name Here']],
+                    ['label' => 'Ninang', 'names' => ['Name Here', 'Name Here', 'Name Here']],
+                ],
+            ],
+            [
+                'title'   => 'Secondary Sponsors',
+                'icon'    => 'candle',
+                'columns' => [
+                    ['label' => 'Cord',   'names' => ['Name &amp; Name']],
+                    ['label' => 'Veil',   'names' => ['Name &amp; Name']],
+                    ['label' => 'Candle', 'names' => ['Name &amp; Name']],
+                ],
+            ],
+            [
+                'title'   => 'Best Man &amp; Maid of Honor',
+                'icon'    => 'ribbon',
+                'columns' => [
+                    ['label' => 'Best Man',      'names' => ['Name Here']],
+                    ['label' => 'Maid of Honor', 'names' => ['Name Here']],
+                ],
+            ],
+            [
+                'title'   => 'Groomsmen &amp; Bridesmaids',
+                'icon'    => 'people',
+                'columns' => [
+                    ['label' => 'Groomsmen',   'names' => ['Name Here', 'Name Here', 'Name Here']],
+                    ['label' => 'Bridesmaids', 'names' => ['Name Here', 'Name Here', 'Name Here']],
+                ],
+            ],
+            [
+                'title'   => 'Flower Girls &amp; Ring Bearers',
+                'icon'    => 'flower',
+                'columns' => [
+                    ['label' => 'Flower Girls', 'names' => ['Name Here', 'Name Here']],
+                    ['label' => 'Ring Bearers', 'names' => ['Name Here', 'Name Here']],
+                ],
+            ],
+        ];
+
+        $icons = [
+            'heart'  => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>',
+            'star'   => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>',
+            'candle' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20H7m10 0v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m8-12a4 4 0 11-8 0 4 4 0 018 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 7a2 2 0 012 2"/>',
+            'ribbon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3l14 9-14 9V3z"/>',
+            'people' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20H7m10 0v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2m8-10a4 4 0 11-8 0 4 4 0 018 0zm7 4a2 2 0 11-4 0 2 2 0 014 0zm-1 6v-1a3 3 0 00-3-3h-1"/>',
+            'flower' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>',
+        ];
+        ?>
+
+        <div class="entourage-list">
+            <?php foreach ($entourage as $group): ?>
+            <div class="entourage-group">
+                <div class="entourage-group-header">
+                    <div class="entourage-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <?= $icons[$group['icon']] ?>
+                        </svg>
+                    </div>
+                    <h3><?= $group['title'] ?></h3>
+                </div>
+                <div class="entourage-columns" style="--col-count:<?= count($group['columns']) ?>">
+                    <?php foreach ($group['columns'] as $col): ?>
+                    <div class="entourage-col">
+                        <?php if (!empty($col['label'])): ?>
+                        <p class="entourage-col-label"><?= $col['label'] ?></p>
+                        <?php endif; ?>
+                        <?php foreach ($col['names'] as $name): ?>
+                        <p class="entourage-name"><?= $name ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     GIFT NOTE
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="gift">
+    <div class="gift-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">A note about gifts</p>
+            <h2 class="section-title">Gift Note</h2>
+            <div class="gold-divider section-divider"></div>
+        </div>
+
+        <div class="gift-card">
+            <div class="gift-envelope-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+
+            <blockquote class="gift-quote">"Your presence is our present."</blockquote>
+
+            <p class="gift-note-text"><?= GIFT_NOTE ?></p>
+
+            <?php if (GIFT_GCASH || GIFT_BANK): ?>
+            <div class="gift-details">
+                <?php if (GIFT_GCASH): ?>
+                <div class="gift-detail-item">
+                    <span class="gift-detail-label">GCash</span>
+                    <span class="gift-detail-value"><?= htmlspecialchars(GIFT_GCASH) ?></span>
+                </div>
+                <?php endif; ?>
+                <?php if (GIFT_BANK): ?>
+                <div class="gift-detail-item">
+                    <span class="gift-detail-label">Bank Transfer</span>
+                    <span class="gift-detail-value"><?= htmlspecialchars(GIFT_BANK) ?></span>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     RSVP FORM
+═══════════════════════════════════════════════════════════════════════════════ -->
+<section id="rsvp">
+    <div class="rsvp-inner fade-up">
+
+        <div class="section-header">
+            <p class="section-tag">Kindly respond by <?= RSVP_DEADLINE ?></p>
+            <h2 class="section-title">RSVP</h2>
+            <div class="gold-divider section-divider"></div>
+            <p class="rsvp-subtitle">
+                We would be honoured by your presence.<br>
+                Please fill out the form below to let us know<br>if you'll be joining us on our special day.
+            </p>
+        </div>
+
+        <!-- Success message -->
+        <div id="rsvpSuccess" class="alert-success hidden">
+            <div class="alert-success-title">✓ Thank you!</div>
+            <p id="rsvpSuccessMsg"></p>
+        </div>
+
+        <!-- Error message -->
+        <div id="rsvpError" class="alert-error hidden"></div>
+
+        <!-- Form -->
+        <form id="rsvpForm" novalidate>
+
+            <!-- Full Name -->
+            <div>
+                <label class="form-label" for="name">
+                    Full Name <span class="form-required">*</span>
+                </label>
+                <input type="text" id="name" name="name" required
+                    placeholder="Your full name"
+                    class="form-input">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="form-label" for="email">
+                    Email Address <span class="form-required">*</span>
+                </label>
+                <input type="email" id="email" name="email" required
+                    placeholder="your@email.com"
+                    class="form-input">
+            </div>
+
+            <!-- Attendance toggle -->
+            <div>
+                <p class="form-label">
+                    Will you attend? <span class="form-required">*</span>
+                </p>
+                <div class="attend-grid">
+                    <div class="attend-card">
+                        <input type="radio" id="attendYes" name="attending" value="yes" required>
+                        <label for="attendYes">
+                            <span class="attend-emoji">🥂</span>
+                            <span class="attend-title">Joyfully accepts</span>
+                            <span class="attend-sub">I'll be there!</span>
+                        </label>
+                    </div>
+                    <div class="attend-card">
+                        <input type="radio" id="attendNo" name="attending" value="no">
+                        <label for="attendNo">
+                            <span class="attend-emoji">💌</span>
+                            <span class="attend-title">Regretfully declines</span>
+                            <span class="attend-sub">I can't make it</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Number of guests -->
+            <div id="guestsSection" class="hidden">
+                <label class="form-label" for="guests">
+                    Number of Guests
+                    <span class="form-label-note">(including yourself)</span>
+                </label>
+                <select id="guests" name="guests" class="form-select">
+                    <?php for ($i = 1; $i <= 8; $i++): ?>
+                    <option value="<?= $i ?>"><?= $i ?> <?= $i === 1 ? 'Guest (just me)' : 'Guests' ?></option>
+                    <?php endfor; ?>
+                </select>
+            </div>
+
+            <!-- Dietary restrictions -->
+            <div>
+                <label class="form-label" for="dietary">
+                    Dietary Restrictions
+                    <span class="form-label-note">(optional)</span>
+                </label>
+                <input type="text" id="dietary" name="dietary"
+                    placeholder="e.g. Vegetarian, Gluten-free, Nut allergy…"
+                    class="form-input">
+            </div>
+
+            <!-- Message -->
+            <div>
+                <label class="form-label" for="message">
+                    Message for the Couple
+                    <span class="form-label-note">(optional)</span>
+                </label>
+                <textarea id="message" name="message" rows="3"
+                    placeholder="Send your well wishes…"
+                    class="form-textarea"></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" id="submitBtn" class="submit-btn">
+                <span id="submitText">Send RSVP</span>
+                <svg id="submitSpinner" class="hidden" fill="none" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                    <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                </svg>
+            </button>
+
+        </form>
+    </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════════════════════ -->
+<footer>
+    <div class="gold-divider footer-divider-top"></div>
+
+    <p class="footer-names"><?= BRIDE_NAME ?> &amp; <?= GROOM_NAME ?></p>
+    <p class="footer-date"><?= WEDDING_DATE ?></p>
+    <p class="footer-hashtag"><?= HASHTAG ?></p>
+
+    <div class="gold-divider footer-divider-mid"></div>
+
+    <p class="footer-made">Made with &hearts; for the most special day</p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+// ─── Invitation screen ────────────────────────────────────────────────────────
+function enterSite() {
+    const screen = document.getElementById('invitationScreen');
+    screen.classList.add('slide-out');
+    document.body.classList.remove('invitation-mode');
+
+    setTimeout(() => {
+        screen.remove();
+        const rsvp = document.getElementById('rsvp');
+        if (rsvp) rsvp.scrollIntoView({ behavior: 'smooth' });
+    }, 950);
+}
+
+// ─── Navbar scroll effect ─────────────────────────────────────────────────────
+const navbar   = document.getElementById('navbar');
+const navBrand = document.getElementById('navBrand');
+
+window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 80;
+    navbar.classList.toggle('scrolled', scrolled);
+    navBrand.classList.toggle('visible', scrolled);
+}, { passive: true });
+
+// ─── Mobile menu ──────────────────────────────────────────────────────────────
+const menuBtn    = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const iconMenu   = document.getElementById('iconMenu');
+const iconClose  = document.getElementById('iconClose');
+
+menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', !open);
+    iconMenu.classList.toggle('hidden', !open);
+    iconClose.classList.toggle('hidden', open);
+});
+
+function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    iconMenu.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+}
+
+// ─── Countdown timer ─────────────────────────────────────────────────────────
+(function countdown() {
+    const target = new Date('<?= WEDDING_DATE_ISO ?>').getTime();
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tick() {
+        const diff = target - Date.now();
+        if (diff <= 0) {
+            ['days','hours','minutes','seconds'].forEach(id => {
+                document.getElementById(id).textContent = '00';
+            });
+            return;
+        }
+        document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+        document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+        document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+        document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+// ─── Scroll-triggered fade-up ─────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// ─── RSVP: show/hide guests field ────────────────────────────────────────────
+document.querySelectorAll('input[name="attending"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        document.getElementById('guestsSection').classList.toggle('hidden', radio.value !== 'yes');
+    });
+});
+
+// ─── RSVP: form submission ────────────────────────────────────────────────────
+document.getElementById('rsvpForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form       = this;
+    const submitBtn  = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const spinner    = document.getElementById('submitSpinner');
+    const successBox = document.getElementById('rsvpSuccess');
+    const errorBox   = document.getElementById('rsvpError');
+
+    successBox.classList.add('hidden');
+    errorBox.classList.add('hidden');
+
+    submitBtn.disabled = true;
+    submitText.textContent = 'Sending…';
+    spinner.classList.remove('hidden');
+
+    try {
+        const res  = await fetch('rsvp.php', { method: 'POST', body: new FormData(form) });
+        const data = await res.json();
+
+        if (data.success) {
+            form.classList.add('hidden');
+            document.getElementById('rsvpSuccessMsg').textContent = data.message;
+            successBox.classList.remove('hidden');
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+            errorBox.textContent = data.message;
+            errorBox.classList.remove('hidden');
+            errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    } catch {
+        errorBox.textContent = 'Could not send your RSVP. Please check your connection and try again.';
+        errorBox.classList.remove('hidden');
+    } finally {
+        submitBtn.disabled = false;
+        submitText.textContent = 'Send RSVP';
+        spinner.classList.add('hidden');
+    }
+});
+</script>
+
+</body>
+</html>
